@@ -19,7 +19,7 @@ export const themeOptions: ThemeOptions = {
     info: {
       main: '#5cecff',
     },
-    divider: 'rgba(244,255,97,0.5)',
+    divider: '#5cecff11',
   },
   typography: {
     fontFamily: 'Arimo',

@@ -1,0 +1,40 @@
+:root {
+  --vaporpink: #ff61c6;
+  --vaporblue: #5cecff;
+  --vapororange: #ff9900;
+  --vaporyellow: #f4ff61;
+  --vapordarker: #0a0c37;
+  --vapordark: #375971;
+  --subtle-gradient: linear-gradient(180deg, var(--vapordarker) 80%, var(--vapordark) 100%);
+  --bg-gradient: linear-gradient(
+    0deg,
+    var(--vaporyellow) 0%,
+    var(--vaporpink) 8%,
+    var(--vapordarker) 60%
+  );
+  --grid-item-gradient: linear-gradient(
+    0deg,
+    var(--vaporblue) 0%,
+    var(--vapordark) 40%,
+    var(--vapordarker) 90%
+  );
+}
+
+.dashboard-box {
+  background-image: var(--bg-gradient);
+}
+
+.dashboard-main {
+  background-image: var(--bg-gradient);
+}
+
+.dashboard-app-bar {
+ background-image: var(--subtle-gradient);
+}
+
+.grid-item {
+  /* border: 1px solid var(--vaporblue); */
+  background-image: var(--grid-item-gradient);
+  border-radius: 10px;
+  box-shadow: #0a0c3759 0px 50px 100px -20px, #0a0c374d 0px 30px 60px -30px, #ff61c659 0px 0px 6px 0px inset;
+}

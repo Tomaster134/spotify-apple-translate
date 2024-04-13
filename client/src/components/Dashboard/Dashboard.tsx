@@ -97,9 +97,9 @@ export default function Dashboard() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} className="dashboard-box">
       <CssBaseline />
-      <AppBar position="absolute" open={open}>
+      <AppBar className="dashboard-app-bar" position="absolute" open={open}>
         <Toolbar
           sx={{
             pr: "24px", // keep right padding when drawer closed
@@ -164,12 +164,13 @@ export default function Dashboard() {
           height: "100vh",
           overflow: "auto",
         }}
+        className="dashboard-main"
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
+            <Grid item xs={12} md={8} lg={9} >
               <Paper
                 sx={{
                   p: 2,
@@ -177,6 +178,7 @@ export default function Dashboard() {
                   flexDirection: "column",
                   height: 240,
                 }}
+                className="grid-item"
               >
                 <Chart />
               </Paper>
@@ -190,13 +192,15 @@ export default function Dashboard() {
                   flexDirection: "column",
                   height: 240,
                 }}
+                className="grid-item"
               >
                 <Deposits />
               </Paper>
             </Grid>
             {/* Recent Orders */}
             <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}
+              className="grid-item">
                 <Orders />
               </Paper>
             </Grid>

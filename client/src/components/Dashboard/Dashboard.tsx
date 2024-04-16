@@ -9,18 +9,20 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems, secondaryListItems } from "../listItems/listItems";
 import Chart from "../Chart/Chart";
 import Deposits from "../Deposits/Deposits";
 import Orders from "../Orders/Orders";
+import { AccountCircle } from "@mui/icons-material";
+import { UserContext } from "../../contexts/UserContext";
+import GetStarted from "../GetStarted/GetStarted";
+import { StartedContext } from "../../contexts/StartedContext";
 
 function Copyright(props: any) {
   return (
@@ -91,7 +93,10 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function Dashboard() {
-  const [open, setOpen] = React.useState(true);
+  const { user } = React.useContext(UserContext);
+  const { started } = React.useContext(StartedContext);
+
+  const [open, setOpen] = React.useState(user.id === -1 ? false : true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -127,9 +132,7 @@ export default function Dashboard() {
             Dashboard
           </Typography>
           <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
+            <AccountCircle />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -170,40 +173,60 @@ export default function Dashboard() {
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9} >
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: 240,
-                }}
-                className="grid-item"
-              >
-                <Chart />
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper
-                sx={{
-                  p: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  height: 240,
-                }}
-                className="grid-item"
-              >
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}
-              className="grid-item">
-                <Orders />
-              </Paper>
-            </Grid>
+            {user.id === -1 ? (
+              <Grid item xs={12} md={8} lg={9}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    height: 240,
+                  }}
+                  className="grid-item"
+                >
+                  <GetStarted />
+                </Paper>
+              </Grid>
+            ) : (
+              <>
+                <Grid item xs={12} md={8} lg={9}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      height: 240,
+                    }}
+                    className="grid-item"
+                  >
+                    <Chart />
+                  </Paper>
+                </Grid>
+                {/* Recent Deposits */}
+                <Grid item xs={12} md={4} lg={3}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: "flex",
+                      flexDirection: "column",
+                      height: 240,
+                    }}
+                    className="grid-item"
+                  >
+                    <Deposits />
+                  </Paper>
+                </Grid>
+                {/* Recent Orders */}
+                <Grid item xs={12}>
+                  <Paper
+                    sx={{ p: 2, display: "flex", flexDirection: "column" }}
+                    className="grid-item"
+                  >
+                    <Orders />
+                  </Paper>
+                </Grid>
+              </>
+            )}
           </Grid>
           <Copyright sx={{ pt: 4 }} />
         </Container>
